@@ -10,7 +10,7 @@
    ```
 4. Build the 0.1 version of the smarttech image using the Dockerfile
    ```
-   docker build -t smarttech:0.1 .
+   docker build -t cloudworld:1 .
    ```
 5. Set variables to examine the image's size and layers
    ```
