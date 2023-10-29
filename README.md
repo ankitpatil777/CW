@@ -131,7 +131,6 @@ docker login
 ```provide USERNAME and PASSWORD```
 * push the image to dockerhub
 ```
-docker tag <dockerhub_id>/nginx_doc:v1 <dockerhub_id>/nginx_doc:v1-new
 docker push <dockerhub_id>/nginx_doc:v1-new
 ```
 * verify from Dockerhub registry
