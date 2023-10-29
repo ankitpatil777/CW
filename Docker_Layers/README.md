@@ -8,7 +8,7 @@
    FROM httpd:2.4
    RUN apt update -y && apt upgrade -y && apt autoremove -y && apt clean && rm -rf /var/lib/apt/lists*
    ```
-4. Build the 0.1 version of the smarttech image using the Dockerfile
+4. Build the 0.1 version of the cloudworld image using the Dockerfile
    ```
    docker build -t cloudworld:1 .
    ```
@@ -17,17 +17,17 @@
    export showLayers='{{ range .RootFS.Layers }}{{ println . }}{{end}}'
    export showSize='{{ .Size }}'
    ```
-6. Compare the httpd and smarttech images
+6. Compare the httpd and cloudworld images
    ```docker images```
-7. Show the smarttech image's size
+7. Show the cloudworld image's size
    ```
    docker inspect -f "$showSize" httpd:2.4
-   docker inspect -f "$showSize" smarttech:0.1
+   docker inspect -f "$showSize" cloudworld:1
    ```
 8. Show the layers
    ```
    docker inspect -f "$showLayers" httpd:2.4
-   docker inspect -f "$showLayers" smarttech:0.1
+   docker inspect -f "$showLayers" cloudworld:1
    ```
 
 #### Load the Website into the Container
