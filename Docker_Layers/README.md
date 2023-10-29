@@ -82,7 +82,6 @@
 12. Are the web data files in the folder ?
 13. ```
 14. ls -l
-15.
-    ```   
+15.```   
 
 
