@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Check if AWS CLI is installed
+if ! command -v aws &> /dev/null; then
+    echo "AWS CLI is not installed. Installing..."
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    sudo apt install -y unzip
+    unzip awscliv2.zip
+    sudo ./aws/install
+    echo "AWS CLI installed."
+else
+    echo "AWS CLI is already installed."
+fi
+
+# Check if kubectl is installed
+if ! command -v kubectl &> /dev/null; then
+    echo "kubectl is not installed. Installing..."
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    echo "kubectl installed."
+else
+    echo "kubectl is already installed."
+fi
+
+# Check if eksctl is installed
+if ! command -v eksctl &> /dev/null; then
+    echo "eksctl is not installed. Installing..."
+    curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+    sudo mv /tmp/eksctl /usr/local/bin
+    echo "eksctl installed."
+else
+    echo "eksctl is already installed."
+fi
+
+# Configure AWS CLI
+echo "Configuring AWS CLI..."
+aws configure
+
+# Create EKS Cluster
+echo "Creating EKS cluster..."
+eksctl create cluster --name ankit --version 1.23 --region us-east-1 --nodegroup-name eksdemo-ng --node-type t3.medium --nodes 4 --managed
